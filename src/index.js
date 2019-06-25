@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import AuthorQuiz from './AuthorQuiz';
 import './index.css';
 
-ReactDOM.render(<App></App>,document.getElementById('root'));
+ReactDOM.render(<AuthorQuiz></AuthorQuiz>,document.getElementById('root'));
