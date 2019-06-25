@@ -9,4 +9,6 @@ AuthorQuiz.propTypes = {
   num2: PropTypes.number.isRequired
 };
 
-ReactDOM.render(<AuthorQuiz num1={5} num2={"a"}></AuthorQuiz>,document.getElementById('root'));
+const objNumbers = { num1 : 5, num2 : 10 };
+
+ReactDOM.render(<AuthorQuiz {...objNumbers}></AuthorQuiz>,document.getElementById('root'));
