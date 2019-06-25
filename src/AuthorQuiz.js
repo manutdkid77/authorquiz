@@ -5,7 +5,8 @@ import './bootstrap.min.css'
 
 class AuthorQuiz extends Component {
   render(){
-    return <h4>Hello React with Bootstrap</h4>
+    var sum = this.props.num1 + this.props.num2;
+    return <h4>Hello React with Bootstrap, {this.props.num1} + {this.props.num2} is {sum} </h4>
   }
 }
 
