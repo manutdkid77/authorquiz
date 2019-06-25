@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import AuthorQuiz from './AuthorQuiz';
 
-describe("basic test case", () => {
-  test("should fail", () => {
-    expect(4).toBe(4);
+describe("AuthorQuiz", () => {
+  test("it renders without crashing", () => {
+    let div = document.createElement('div');
+    ReactDOM.render(<AuthorQuiz />,div);
   })
 });
