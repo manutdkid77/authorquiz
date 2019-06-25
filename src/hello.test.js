@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Enzyme,{ shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 function Hello(props) {
     return <h1>Hello {props.name}</h1>;
@@ -33,6 +35,21 @@ describe("Lets test directly", () => {
 describe("Testing with ReactDOM", () => {
     it("if it renders without crashing", () => {
         let div = document.createElement('div');
-        ReactDOM.render(<Hello name='{Nathaniel}'></Hello>, div);
+        ReactDOM.render(<Hello name='Nathaniel'></Hello>, div);
     });
+});
+
+//configure enzyme adapter
+Enzyme.configure({ adapter: new Adapter() });
+
+describe("Testing with enzyme",()=>{
+    test("renders a h1",()=>{
+        const wrapper = shallow(<Hello name='Nathaniel'></Hello>);
+        expect(wrapper.find("h1").length).toBe(1);
+    })
+
+    test("it contains the string: Hello Nathaniel",()=>{
+        const wrapper = shallow(<Hello name='Nathaniel'></Hello>)
+        expect(wrapper.contains(<h1>Hello Nathaniel</h1>)).toBe(true);
+    })
 });
