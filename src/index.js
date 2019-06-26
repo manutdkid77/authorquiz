@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import AuthorQuiz from './AuthorQuiz';
 import './index.css';
 import PropTypes from 'prop-types';
+import { shuffle, sample } from 'underscore';
 
 const authors = [
   {
@@ -51,11 +52,35 @@ const authors = [
   }
 ];
 
+function getTurnData(authors) {
+  //reduce function has 2 arguments, the callback fn and the initial value for accumulator
+
+  //create an arr containing list of all books of all authors
+  const allBooks = authors.reduce(function (acc, curr, index) {
+    return acc.concat(curr.books);
+  }, []);
+
+  console.log(allBooks);
+  console.log(shuffle(allBooks));
+
+  //shuffle the books, and take 4 books
+  const fourRandomBooks = shuffle(allBooks).slice(0, 4);
+  //randomly get 1 book from the collection of 4 books
+  const correctTitle = sample(fourRandomBooks);
+
+  //find the author whose books collection has a book that matches correctTilte
+  let correctAuthor = authors.find(o =>
+    o.books.some((title) =>
+      title === correctTitle));
+
+  return {
+    author: correctAuthor,
+    books: fourRandomBooks
+  };
+}
+
 const state = {
-  turnData: {
-    author: authors[0],
-    books: authors[0].books
-  }
+  turnData: getTurnData(authors)
 }
 
 ReactDOM.render(<AuthorQuiz {...state}></AuthorQuiz>, document.getElementById('root'));
