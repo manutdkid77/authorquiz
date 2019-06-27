@@ -80,7 +80,20 @@ function getTurnData(authors) {
 }
 
 const state = {
-  turnData: getTurnData(authors)
+  turnData: getTurnData(authors),
+  highlight: ''
 }
 
-ReactDOM.render(<AuthorQuiz {...state}></AuthorQuiz>, document.getElementById('root'));
+function onAnswerSelected(answer) {
+  //search from the author's book collection if selected book matches it
+  const isCorrect = state.turnData.author.books.some(book => book === answer);
+  state.highlight = isCorrect ? 'correct' : 'wrong';
+  //call the render function to update the view
+  render();
+}
+
+function render() {
+  ReactDOM.render(<AuthorQuiz {...state} onAnswerSelected={onAnswerSelected}></AuthorQuiz>, document.getElementById('root'));
+}
+
+render();
