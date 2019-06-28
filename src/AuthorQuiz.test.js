@@ -56,4 +56,25 @@ describe("AuthorQuiz", () => {
       expect(wrapper.find("div.row.turn").props().style.backgroundColor).toBe('green');
     })
   });
+
+  //event based tests
+  describe("when the first answer is selected", () => {
+    let wrapper;
+    //create a mock fn to pass as callback for onAnswerSelected
+    const handleAnswerSelected = jest.fn();
+    beforeAll(() => {
+      wrapper = mount(<AuthorQuiz {...state} onAnswerSelected={handleAnswerSelected}></AuthorQuiz>);
+      wrapper.find('.answer').first().simulate('click');
+    });
+
+    test("onAnswerSelected should be called", () => {
+      //this will check if function is called on click of first answer
+      expect(handleAnswerSelected).toHaveBeenCalled();
+    });
+
+    test("selected answer should be Hamlet",()=>{
+      expect(handleAnswerSelected).toHaveBeenCalledWith('Hamlet');
+    });
+  });
+
 });
