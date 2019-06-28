@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AuthorQuiz from './AuthorQuiz';
 import './index.css';
-import PropTypes from 'prop-types';
 import { shuffle, sample } from 'underscore';
 
 const authors = [
@@ -59,9 +58,6 @@ function getTurnData(authors) {
   const allBooks = authors.reduce(function (acc, curr, index) {
     return acc.concat(curr.books);
   }, []);
-
-  console.log(allBooks);
-  console.log(shuffle(allBooks));
 
   //shuffle the books, and take 4 books
   const fourRandomBooks = shuffle(allBooks).slice(0, 4);

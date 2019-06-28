@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import './bootstrap.min.css'
+import PropTypes from 'prop-types';
 
 function Hero() {
     return (<div className="row">
@@ -37,6 +38,21 @@ function Turn({ author, books,highlight,onAnswerSelected }) {
         </div>
     </div>);
 }
+
+//Added prop type validation for Turn component
+Turn.propTypes = {
+    //author is an object, so its of type 
+    author : PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        imageUrl: PropTypes.string.isRequired,
+        imageSource: PropTypes.string.isRequired,
+        //books is an array of type string
+        books: PropTypes.arrayOf(PropTypes.string).isRequired
+    }),
+    books: PropTypes.arrayOf(PropTypes.string).isRequired,
+    highlight: PropTypes.string.isRequired,
+    onAnswerSelected: PropTypes.func.isRequired
+};
 
 function Continue() {
     return <div></div>;
